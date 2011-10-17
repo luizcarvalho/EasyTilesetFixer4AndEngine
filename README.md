@@ -1,7 +1,7 @@
 EasyTilesetFixer4AndEngine (ETF4AE) is easy  tool for transform the most useds tileset format for the format used in framework for game AndEngine
 
-![EasyTileSetFixer4AndEngine](assets/EasyTileSetFixer4AndEngine.jpg)
-<img src="http://github.com/LuizCarvalho/EasyTilesetFixer4AndEngine/blob/master/assets/EasyTileSetFixer4AndEngine.jpg"></div>
+[![EasyTilesetFixer][banner]
+
 
 
 
@@ -57,4 +57,5 @@ Blog: [RedRails](http://www.redrails.com.br)
 
 
 
+[banner]: http://www.redrails.com.br/wp-content/uploads/2011/10/EasyTileSetFixer4AndEngine.jpg "EasyTileSetFixer4AndEngine"
 
