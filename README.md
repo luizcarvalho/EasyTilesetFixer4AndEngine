@@ -34,11 +34,11 @@ download and uncompress the [fixer4ae.zip](https://github.com/LuizCarvalho/EasyT
 
 
 for quick use copy your tileset image in same folder of the fixer4ae.jar with name input.png and tiles with 34px and run command
-> java -jar fixer4ae.jar 
+    java -jar fixer4ae.jar 
 
 
 for custom options use -u options and show the usage commands
-> java -jar fixer4ae.jar -u
+    java -jar fixer4ae.jar -u
 
 
 
