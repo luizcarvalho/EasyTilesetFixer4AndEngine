@@ -3,7 +3,7 @@ EasyTilesetFixer4AndEngine (ETF4AE) is easy  tool for transform the most useds t
 [![EasyTilesetFixer][banner]
 
 
-
+Download the MegaPack with 50 tilesets fixeds for AndEngine [here](http://www.redrails.com.br/2011/10/super-pacote-com-50-tilesets-em-hd-para-andengine/)
 
 Tileset usual format
 --------------------
@@ -39,6 +39,7 @@ for quick use copy your tileset image in same folder of the fixer4ae.jar with na
 
 for custom options use -u options and show the usage commands
     java -jar fixer4ae.jar -u
+
 
 
 

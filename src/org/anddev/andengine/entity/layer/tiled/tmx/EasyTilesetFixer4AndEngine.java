@@ -100,8 +100,8 @@ public class EasyTilesetFixer4AndEngine {
 		final int imageWidth = img.getWidth();
 		final int imageHeight = img.getHeight();
 
-		final int columnCount = imageWidth / pTileWidth;
-		final int rowCount = imageHeight / pTileHeight;
+		final int columnCount = (imageWidth / pTileWidth);
+		final int rowCount = (imageHeight / pTileHeight);
 
 		final BufferedImage out = new BufferedImage(1 + imageWidth
 				+ columnCount, 1 + imageHeight + rowCount,
