@@ -23,9 +23,7 @@ Tileset usual format
 ![EasyTileSetFixer4AndEngine](output.png)
 <img src="http://github.com/LuizCarvalho/EasyTilesetFixer4AndEngine/blob/master/dist/fixed.jpg"></div>
 
-## Initial procedures
-if you need resize tile, without interpolation, for purchase tiles with 32px use tools like photoshop,fireworks (using nearest neighbor) or GIMP.
-Change for percent and insert size informatins 106,25% of Width and 106,25% of Height
+
 
 
 
@@ -41,6 +39,9 @@ for custom options use -u options and show the usage commands
     java -jar fixer4ae.jar -u
 
 
+## Optional Build
+The EasyFixer resize tiles using simple resize method, for best result you can use other tool, without interpolation method. For purchase tiles with 32px use tools like photoshop,fireworks (using nearest neighbor) or GIMP.
+Change for percent and insert size informatins 106,25% of Width and 106,25% of Height
 
 
 Original Source:

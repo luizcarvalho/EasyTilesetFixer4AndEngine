@@ -40,12 +40,13 @@ public class EasyTilesetFixer4AndEngine {
 		options.addOption("o", "out", true, "Filename of the fixed tileset. Default: fixed.png");
 		options.addOption("m", true, "Margin of the existing tileset. Default: 2");
 		options.addOption("s", true, "Spacing of the existing tileset. Default: 3");
-		options.addOption("w", true, "Width of a tile. Default: 34");
-		options.addOption("h", true, "Height of a tile. Default: 34");
+		options.addOption("w", true, "Width of a tile. Default: 32 (automate resizable to 34px W e H)");
+		options.addOption("h", true, "Height of a tile. Default: 32 ");
 		options.addOption("u", "usage", false, "HELP !!!");
 
 		final BasicParser parser = new BasicParser();
 		final CommandLine cl = parser.parse(options, args);
+		int automate = 0;
 
 		try {
 			if (cl.hasOption('u')) {
@@ -56,15 +57,18 @@ public class EasyTilesetFixer4AndEngine {
 				//FOR DEVELOP //final String filename = cl.getOptionValue("f","dist"+File.separator+"input.png");
 				final String outFilename = cl.getOptionValue("o","fixed.png");
 				//FOR DEVELOP//final String outFilename = cl.getOptionValue("o","dist"+File.separator+"fixed.png");
-				final int tileWidth = Integer.parseInt(cl.getOptionValue("w","34"));
-				final int tileHeight = Integer.parseInt(cl.getOptionValue("h","34"));
+				if(!cl.hasOption('w'))
+					automate = 2;					
+				
+				final int tileWidth = Integer.parseInt(cl.getOptionValue("w","32"));
+				final int tileHeight = Integer.parseInt(cl.getOptionValue("h","32"));
 				final int margin = Integer
 						.parseInt(cl.getOptionValue("m", "2"));
 				final int spacing = Integer.parseInt(cl
 						.getOptionValue("s", "3"));
 				
 				fix(filename, outFilename, tileWidth, tileHeight, margin,
-						spacing);
+						spacing, automate);
 
 			}
 		} catch (final Throwable t) {
@@ -84,7 +88,7 @@ public class EasyTilesetFixer4AndEngine {
 
 	private static void fix(final String pFilename,
 			final String pOutputFilename, final int pTileWidth,
-			final int pTileHeight, final int pMargin, final int pSpacing)
+			final int pTileHeight, final int pMargin, final int pSpacing, final int automate)
 			throws IOException {
 		final File sourceFile = new File(pFilename);
 		if (!sourceFile.isFile()) {
@@ -102,10 +106,12 @@ public class EasyTilesetFixer4AndEngine {
 
 		final int columnCount = (imageWidth / pTileWidth);
 		final int rowCount = (imageHeight / pTileHeight);
-
-		final BufferedImage out = new BufferedImage(1 + imageWidth
-				+ columnCount, 1 + imageHeight + rowCount,
-				BufferedImage.TYPE_INT_ARGB);
+		//System.out.println("tile have "+columnCount+" tiles W and "+rowCount+"tiles H");
+		//System.out.println("Original size: "+imageWidth+"pxW per "+imageHeight+"pxH");
+		final int outWidth = 1 + imageWidth+ columnCount+columnCount*automate;
+		final int outHeight = 1 + imageHeight + rowCount+rowCount*automate;
+		//System.out.println("Output size: "+outWidth+"pxW per "+outHeight+"pxH");
+		final BufferedImage out = new BufferedImage(outWidth,outHeight ,BufferedImage.TYPE_INT_ARGB);
 		final Graphics g = out.getGraphics();
 
 		int newRow = 1;
@@ -118,26 +124,28 @@ public class EasyTilesetFixer4AndEngine {
 				int sx = column * pTileWidth;
 				int sy = row * pTileHeight;
 
-				final int sx2 = sx + pTileWidth;
-				final int sy2 = sy + pTileHeight;
+				final int sx2 = sx + pTileWidth-automate;
+				final int sy2 = sy + pTileHeight-automate;
 
 				/* Upper-Left coordinates in the destination image. */
 				final int dx = sx + newColumn;
 				final int dy = sy + newRow;
 
-				final int dx2 = dx + pTileWidth;
-				final int dy2 = dy + pTileHeight;
+				final int dx2 = dx + pTileWidth+automate;
+				final int dy2 = dy + pTileHeight+automate;				
 
 				g.drawImage(img, dx, dy, dx2, dy2, sx, sy, sx2, sy2, null);
 				out.setRGB(dx, dy, blank);//draw transparent pixel top-left
-				out.setRGB(dx+pTileWidth-1, dy, blank);//draw transparent pixel top-right
-				out.setRGB(dx, dy+pTileHeight-1, blank);//draw transparent pixel top-left
-				out.setRGB(dx+pTileWidth-1, dy+pTileHeight-1, blank);//draw transparent pixel bottom-right
-				newRow++;
+				out.setRGB(dx+pTileWidth-1+automate, dy, blank);//draw transparent pixel top-right
+				out.setRGB(dx, dy+pTileHeight-1+automate, blank);//draw transparent pixel top-left
+				out.setRGB(dx+pTileWidth-1+automate, dy+pTileHeight-1+automate, blank);//draw transparent pixel bottom-right
+				newRow=newRow+1+automate;
+				
 				
 			}
+			
 			newRow=1;
-			newColumn++;
+			newColumn=newColumn+1+automate;
 		}
 		System.out.println("Saving... ");
 		ImageIO.write(out, "png", pOutputFilename != null ? new File(
