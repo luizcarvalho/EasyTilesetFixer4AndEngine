@@ -31,7 +31,7 @@ Tileset usual format
 download and uncompress the [fixer4ae.zip](https://github.com/LuizCarvalho/EasyTilesetFixer4AndEngine/blob/master/dist/fixer4ae.zip)
 
 
-for quick use copy your tileset image in same folder of the fixer4ae.jar with name input.png and tiles with 34px and run command
+for quick use copy your tileset image in same folder of the fixer4ae.jar with name input.png and tiles with 32px and run command
     java -jar fixer4ae.jar 
 
 
